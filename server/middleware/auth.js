@@ -16,7 +16,7 @@ let auth = (req, res, next) =>{
         req.token = token;
         req.user = user;
         next();
-        
+
 
     })
 
@@ -28,4 +28,4 @@ let auth = (req, res, next) =>{
 }
 
 
-module.exports(auth);
+module.exports = {auth};

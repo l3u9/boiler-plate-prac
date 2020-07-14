@@ -83,7 +83,7 @@ app.post('/api/users/login',(req,res) => {
 
 
 
-app.ger('/api/users/auth', auth, (req,res) => {
+app.get('/api/users/auth', auth, (req,res) => {
     //여기로 동작하게되면 authentication값이 true
     res.status(200).json({
         _id: req.user._id,
@@ -97,6 +97,21 @@ app.ger('/api/users/auth', auth, (req,res) => {
     })
 
 })
+
+app.get('/api/users/logout',auth ,(req,res) => {
+    
+    User.findOneAndUpdate({ _id: req.user._id },
+        { token: ""}
+        , (err, user) => {
+            if(err) return res.json({success: false})
+            return res.status(200).send({
+                success: true
+            })
+        })
+})
+
+
+app.get('/api/hello', (req, res) => res.send('Hello World!~ '))
 
 
 
